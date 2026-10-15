@@ -1,0 +1,254 @@
+
+/* Estilo general de la aplicación */
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.pagina {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Encabezado */
+.encabezado {
+  background-color: #ffffff;
+  padding: 25px;
+  border-bottom: 1px solid #ddd;
+}
+
+.encabezado > div {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.encabezado h1 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.encabezado p {
+  color: #666;
+}
+
+.etiqueta {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Contenido principal */
+main {
+  max-width: 1100px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+.tarjeta {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.titulo-seccion h2 {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.titulo-seccion p {
+  color: #666;
+}
+
+/* Selección de archivos */
+.archivos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.campo-archivo {
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+.campo-archivo label,
+.campo-filtro label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.campo-archivo input {
+  width: 100%;
+}
+
+.campo-archivo small {
+  display: block;
+  margin-top: 8px;
+  color: #666;
+}
+
+/* Botón principal */
+.boton-principal {
+  background-color: #284b70;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.boton-principal:hover {
+  background-color: #1c3652;
+}
+
+.boton-principal:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mensajes */
+.mensaje-error {
+  color: #a52a2a;
+  margin-top: 15px;
+}
+
+.mensaje-cargando {
+  color: #555;
+  margin-top: 15px;
+}
+
+/* Resumen de resultados */
+.seccion-resultados {
+  margin-bottom: 20px;
+}
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.indicador {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+.indicador span {
+  display: block;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.indicador strong {
+  font-size: 28px;
+}
+
+.indicador-correcto strong {
+  color: #287a45;
+}
+
+.indicador-error strong {
+  color: #b13b3b;
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.campo-filtro {
+  flex: 1;
+}
+
+.campo-filtro input,
+.campo-filtro select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Tabla de facturas */
+.contenedor-tabla {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+th,
+td {
+  border-bottom: 1px solid #ddd;
+  padding: 12px;
+  vertical-align: top;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+.id-factura {
+  font-weight: bold;
+}
+
+/* Estados */
+.estado {
+  font-weight: bold;
+}
+
+.estado-correcto {
+  color: #287a45;
+}
+
+.estado-error {
+  color: #b13b3b;
+}
+
+.sin-observaciones {
+  color: #777;
+}
+
+.lista-causas {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.sin-resultados,
+.pie-tabla {
+  color: #666;
+}
+
+/* Pie de página */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 13px;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 700px) {
+  .archivos,
+  .resumen {
+    grid-template-columns: 1fr;
+  }
+
+  .filtros {
+    flex-direction: column;
+  }
+}

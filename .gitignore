@@ -1,0 +1,19 @@
+# Dependencias de Angular
+node_modules/
+.angular/
+dist/
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Configuración local y secretos
+.env
+.env.*
+!.env.example
+
+# Archivos temporales
+.DS_Store
+Thumbs.db

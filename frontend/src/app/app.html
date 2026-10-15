@@ -1,0 +1,310 @@
+
+<div class="pagina">
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+    <div>
+      <span class="etiqueta"> PRUEBA TÉCNICA </span>
+      <h1>Conciliador de facturas y retenciones </h1>
+      <p>
+        Validación tributaria y conciliación básica
+        entre facturas y registros contables.
+      </p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- CARGA DE ARCHIVOS -->
+    <section class="tarjeta">
+      <div class="titulo-seccion">
+        <h2>1. Cargar archivos</h2>
+        <p>
+          Selecciona archivos CSV de facturas
+          y contabilidad.
+        </p>
+      </div>
+
+      <div class="archivos">
+
+        <div class="campo-archivo">
+          <label for="facturas">
+            Archivo de facturas
+          </label>
+
+          <input
+            id="facturas"
+            type="file"
+            accept=".csv"
+            (change)="seleccionarFacturas($event)"
+          />
+
+          <small>
+            {{
+              archivoFacturas?.name ||
+              'Ningún archivo seleccionado'
+            }}
+          </small>
+        </div>
+
+        <div class="campo-archivo">
+          <label for="contabilidad">
+            Archivo de contabilidad
+          </label>
+
+          <input
+            id="contabilidad"
+            type="file"
+            accept=".csv"
+            (change)="seleccionarContabilidad($event)"
+          />
+
+          <small>
+            {{
+              archivoContabilidad?.name ||
+              'Ningún archivo seleccionado'
+            }}
+          </small>
+        </div>
+
+      </div>
+
+      <button
+        class="boton-principal"
+        type="button"
+        [disabled]="cargando"
+        (click)="conciliar()"
+      >
+        {{ cargando ? 'Procesando archivos...' : 'Conciliar archivos' }}
+      </button>
+
+      <!-- ERROR -->
+      <div
+        *ngIf="error"
+        class="mensaje-error"
+        role="alert"
+      >
+        {{ error }}
+      </div>
+
+      <!-- CARGANDO -->
+      <div
+        *ngIf="cargando"
+        class="mensaje-cargando"
+      >
+        Analizando facturas y registros contables...
+      </div>
+
+    </section>
+
+    <!-- RESULTADOS -->
+    <ng-container *ngIf="respuesta as datos">
+
+      <!-- RESUMEN -->
+      <section class="seccion-resultados">
+
+        <div class="titulo-seccion">
+          <h2>2. Resumen de conciliación</h2>
+          <p>
+            Resultado del análisis de los archivos cargados.
+          </p>
+        </div>
+
+        <div class="resumen">
+
+          <div class="indicador">
+            <span>Total de facturas</span>
+            <strong>
+              {{ datos.resumen.total_facturas }}
+            </strong>
+          </div>
+
+          <div class="indicador indicador-correcto">
+            <span>Facturas correctas</span>
+            <strong>
+              {{ datos.resumen.correctas }}
+            </strong>
+          </div>
+
+          <div class="indicador indicador-error">
+            <span>Con inconsistencias</span>
+            <strong>
+              {{ datos.resumen.inconsistencias }}
+            </strong>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TABLA -->
+      <section class="tarjeta">
+
+        <div class="titulo-seccion">
+          <h2>3. Detalle de facturas</h2>
+          <p>
+            Consulta el estado de cada factura
+            y las causas de las inconsistencias.
+          </p>
+        </div>
+
+        <div class="filtros">
+
+          <div class="campo-filtro">
+            <label for="filtro">
+              Filtrar por estado
+            </label>
+
+            <select
+              id="filtro"
+              [(ngModel)]="filtro"
+            >
+              <option value="Todas">Todas</option>
+              <option value="Correcta">Correctas</option>
+              <option value="Con inconsistencia">
+                Con inconsistencia
+              </option>
+            </select>
+          </div>
+
+          <div class="campo-filtro">
+            <label for="busqueda">
+              Buscar factura
+            </label>
+
+            <input
+              id="busqueda"
+              type="text"
+              placeholder="Ej. FAC-0001"
+              [(ngModel)]="busqueda"
+            />
+          </div>
+
+        </div>
+
+        <div class="contenedor-tabla">
+          <table>
+            <thead>
+              <tr>
+                <th>Factura</th>
+                <th>Proveedor</th>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Base gravable</th>
+                <th>IVA</th>
+                <th>Retención</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr
+                *ngFor="let factura of resultadosFiltrados"
+              >
+
+                <td class="id-factura">
+                  {{ factura.id_factura }}
+                </td>
+
+                <td>
+                  {{ factura.nit_proveedor }}
+                </td>
+
+                <td>
+                  {{ factura.fecha_factura }}
+                </td>
+
+                <td>
+                  {{ factura.concepto }}
+                </td>
+
+                <td>
+                  {{
+                    factura.base_gravable
+                    | number:'1.0-2'
+                  }}
+                </td>
+
+                <td>
+                  {{
+                    factura.valor_iva
+                    | number:'1.0-2'
+                  }}
+                </td>
+
+                <td>
+                  {{
+                    factura.valor_retencion
+                    | number:'1.0-2'
+                  }}
+                </td>
+
+                <td>
+                  {{
+                    factura.total_factura
+                    | number:'1.0-2'
+                  }}
+                </td>
+
+                <td>
+                  <span
+                    class="estado"
+                    [class.estado-correcto]="factura.estado === 'Correcta'"
+                    [class.estado-error]="factura.estado !== 'Correcta'"
+                  >
+                    {{ factura.estado }}
+                  </span>
+                </td>
+
+                <td>
+                  <span
+                    *ngIf="factura.causas.length === 0"
+                    class="sin-observaciones"
+                  >
+                    Sin observaciones
+                  </span>
+
+                  <ul
+                    *ngIf="factura.causas.length > 0"
+                    class="lista-causas"
+                  >
+                    <li *ngFor="let causa of factura.causas">
+                      {{ causa }}
+                    </li>
+                  </ul>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          *ngIf="resultadosFiltrados.length === 0"
+          class="sin-resultados"
+        >
+          No se encontraron facturas con esos filtros.
+        </div>
+
+        <p class="pie-tabla">
+          Mostrando
+          {{ resultadosFiltrados.length }}
+          de
+          {{ datos.resumen.total_facturas }}
+          facturas.
+        </p>
+
+      </section>
+
+    </ng-container>
+
+  </main>
+
+  <footer>
+    Prototipo de conciliación de facturas · Angular + Python
+  </footer>
+
+</div>
