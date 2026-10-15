@@ -56,6 +56,17 @@ Para ejecutar el proyecto se necesita:
 - Un navegador web
 
 Las versiones indicadas corresponden al entorno utilizado durante el desarrollo y las pruebas.
+**Obtener el proyecto**
+
+Para descargar el código fuente, ingresar al repositorio de GitHub y seleccionar Code → Download ZIP. Descomprimir el archivo y abrir la carpeta del proyecto en Visual Studio Code o en una terminal.
+
+También se puede clonar el repositorio mediante Git:
+
+git clone https://github.com/jomirandap-spec/conciliador-facturas.git
+cd conciliador-facturas
+
+Los comandos de instalación del backend deben ejecutarse desde la carpeta principal del proyecto. Para iniciar el frontend, se debe abrir una segunda terminal y entrar a la carpeta frontend.
+
 
 ## 5. Instalación del backend
 
@@ -82,6 +93,10 @@ También se puede consultar la documentación de la API en:
 http://127.0.0.1:8000/docs
 
 **Nota:** se utiliza el comando `py`. En otros sistemas puede ser necesario utilizar `python` o `python3`.
+**Nota sobre las direcciones locales:** Los enlaces http://127.0.0.1:8000, http://127.0.0.1:8000/docs y http://localhost:4200 funcionan cuando los servidores correspondientes están ejecutándose. El evaluador debe iniciar el backend y el frontend en su propio computador siguiendo las instrucciones de este README.
+
+El repositorio de GitHub contiene el código fuente, pero no una aplicación publicada en internet. La documentación de la API se consulta en http://127.0.0.1:8000/docs.
+
 
 ## 6. Instalación del frontend
 
