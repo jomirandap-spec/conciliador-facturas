@@ -56,6 +56,7 @@ Para ejecutar el proyecto se necesita:
 - Un navegador web
 
 Las versiones indicadas corresponden al entorno utilizado durante el desarrollo y las pruebas.
+
 **Obtener el proyecto**
 
 Para descargar el código fuente, ingresar al repositorio de GitHub y seleccionar Code → Download ZIP. Descomprimir el archivo y abrir la carpeta del proyecto en Visual Studio Code o en una terminal.
@@ -242,11 +243,8 @@ La solución fue ejecutada y probada manualmente durante el desarrollo. Se verif
 
 El uso de inteligencia artificial se declara de manera explícita como parte de la transparencia del proceso de desarrollo.
 
-## 13. Consideraciones sobre los datos
 
-Los archivos de prueba entregados deben contener información ficticia. No se deben incluir credenciales, información real de proveedores ni datos contables sensibles.
-
-## 14. Ejecución resumida
+## 13. Ejecución resumida
 
 **Terminal 1 — Backend:**
 
